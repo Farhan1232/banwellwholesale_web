@@ -119,6 +119,9 @@ body { font-family: var(--font); color: var(--text); background: #fff; margin: 0
     width: auto;
     object-fit: contain;
     display: block;
+    mix-blend-mode: screen;
+    filter: brightness(1.1) contrast(1.05);
+    background: transparent;
   }
   .logo-img-fallback {
     height: 42px;
@@ -201,21 +204,6 @@ body { font-family: var(--font); color: var(--text); background: #fff; margin: 0
   }
   .header-action:hover { color: var(--red); }
   .header-action svg { width: 22px; height: 22px; }
-  .badge {
-    position: absolute;
-    top: -6px;
-    right: -8px;
-    background: var(--red);
-    color: #fff;
-    font-size: 10px;
-    font-weight: 700;
-    width: 18px;
-    height: 18px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
 
   /* ── NAV ── */
   .nav {
@@ -402,7 +390,7 @@ body { font-family: var(--font); color: var(--text); background: #fff; margin: 0
   }
   .hero-arrow:hover { background: var(--red); }
 
-  /* ── CATEGORY BANNERS (now in middle of page) ── */
+  /* ── CATEGORY BANNERS ── */
   .cat-banners {
     width: 100%;
     padding: 0 24px;
@@ -415,48 +403,46 @@ body { font-family: var(--font); color: var(--text); background: #fff; margin: 0
     position: relative;
     border-radius: var(--radius);
     overflow: hidden;
-    height: 220px;
+    height: 180px;
     cursor: pointer;
+    background: var(--dark);
   }
-  .cat-banner img {
-    width: 100%; height: 100%;
-    object-fit: cover;
-    transition: transform 0.5s ease;
-  }
-  .cat-banner:hover img { transform: scale(1.08); }
   .cat-banner-overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(135deg, rgba(228,30,38,0.85) 0%, rgba(10,10,30,0.6) 100%);
+    background: linear-gradient(135deg, rgba(228,30,38,0.92) 0%, rgba(10,10,30,0.85) 100%);
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
-    padding: 24px;
+    justify-content: center;
+    padding: 28px 32px;
     transition: background 0.3s;
   }
-  .cat-banner:hover .cat-banner-overlay { background: linear-gradient(135deg, rgba(228,30,38,0.95) 0%, rgba(10,10,30,0.7) 100%); }
+  .cat-banner:hover .cat-banner-overlay { background: linear-gradient(135deg, rgba(228,30,38,1) 0%, rgba(10,10,30,0.9) 100%); }
+  .cat-banner-icon { font-size: 28px; margin-bottom: 10px; }
   .cat-banner-title {
     font-family: var(--font-cond);
-    font-size: 26px;
+    font-size: 22px;
     font-weight: 800;
     color: #fff;
     line-height: 1.1;
-    margin-bottom: 8px;
+    margin-bottom: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
   }
   .cat-banner-link {
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    color: rgba(255,255,255,0.9);
-    font-size: 13px;
+    color: rgba(255,255,255,0.8);
+    font-size: 12px;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 1px;
     transition: gap 0.2s;
   }
-  .cat-banner:hover .cat-banner-link { gap: 10px; }
+  .cat-banner:hover .cat-banner-link { gap: 10px; color: #fff; }
 
-  /* ── SECTIONS (full width) ── */
+  /* ── SECTIONS ── */
   .section {
     width: 100%;
     padding: 0 24px;
@@ -514,9 +500,10 @@ body { font-family: var(--font); color: var(--text); background: #fff; margin: 0
   }
   .view-all:hover { gap: 8px; }
 
+  /* ── PRODUCT CARD — B2B / Trade Distribution style ── */
   .products-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
     gap: 20px;
   }
   .product-card {
@@ -534,8 +521,17 @@ body { font-family: var(--font); color: var(--text); background: #fff; margin: 0
     height: 200px;
     overflow: hidden;
     background: var(--light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
   }
-  .product-img-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; }
+  .product-img-wrap img { 
+    width: 100%; 
+    height: 100%; 
+    object-fit: contain; 
+    transition: transform 0.4s ease; 
+  }
   .product-card:hover .product-img-wrap img { transform: scale(1.06); }
   .product-badge {
     position: absolute;
@@ -549,31 +545,9 @@ body { font-family: var(--font); color: var(--text); background: #fff; margin: 0
     text-transform: uppercase;
   }
   .product-badge.new { background: #16a34a; }
-  .product-actions {
-    position: absolute;
-    top: 12px; right: 12px;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    opacity: 0;
-    transform: translateX(10px);
-    transition: opacity 0.25s, transform 0.25s;
-  }
-  .product-card:hover .product-actions { opacity: 1; transform: translateX(0); }
-  .action-btn {
-    width: 36px; height: 36px;
-    background: #fff;
-    border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.12);
-    transition: background 0.2s, color 0.2s;
-    color: var(--gray);
-    cursor: pointer;
-    border: none;
-    font-size: 15px;
-  }
-  .action-btn:hover { background: var(--red); color: #fff; }
-  .product-info { padding: 16px; }
+  .product-badge.available { background: #0369a1; }
+
+  .product-info { padding: 18px; }
   .product-brand {
     font-size: 11px;
     color: var(--red);
@@ -583,36 +557,83 @@ body { font-family: var(--font); color: var(--text); background: #fff; margin: 0
     margin-bottom: 6px;
   }
   .product-name {
-    font-size: 14px;
-    font-weight: 600;
+    font-size: 15px;
+    font-weight: 700;
     color: var(--dark);
-    margin-bottom: 12px;
+    margin-bottom: 8px;
     line-height: 1.4;
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
   }
-  .product-stars { display: flex; gap: 2px; margin-bottom: 10px; }
-  .star { color: #f59e0b; font-size: 13px; }
-  .star.empty { color: #ddd; }
-  .add-to-cart {
+  .product-ean {
+    font-size: 11px;
+    color: var(--gray);
+    margin-bottom: 14px;
+    font-family: monospace;
+    letter-spacing: 0.5px;
+  }
+  .product-availability {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #16a34a;
+    background: #f0fdf4;
+    border: 1px solid #bbf7d0;
+    padding: 4px 10px;
+    border-radius: 4px;
+    margin-bottom: 14px;
+  }
+  .product-availability.limited { color: #b45309; background: #fffbeb; border-color: #fde68a; }
+
+  /* Contact to order button — B2B style */
+  .contact-btn {
     width: 100%;
     background: var(--dark);
     color: #fff;
-    padding: 10px;
+    padding: 11px;
     font-size: 13px;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    margin-top: 4px;
     border-radius: 6px;
     transition: background 0.2s;
     border: none;
     cursor: pointer;
     font-family: var(--font);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
   }
-  .add-to-cart:hover { background: var(--red); }
+  .contact-btn:hover { background: var(--red); }
+
+  /* ── DISTRIBUTION BADGE STRIP ── */
+  .dist-strip {
+    width: 100%;
+    background: var(--dark);
+    padding: 18px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+    margin-top: 0;
+  }
+  .dist-strip-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: rgba(255,255,255,0.85);
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .dist-strip-item span { color: var(--red); font-size: 18px; }
 
   /* ── DEAL BANNER ── */
   .deal-banner {
@@ -685,12 +706,6 @@ body { font-family: var(--font); color: var(--text); background: #fff; margin: 0
     line-height: 1;
   }
   .countdown-label { font-size: 11px; color: rgba(255,255,255,0.8); text-transform: uppercase; letter-spacing: 1px; margin-top: 4px; }
-  .deal-img {
-    display: flex;
-    gap: 24px;
-    align-items: center;
-  }
-  .deal-img img { height: 200px; object-fit: contain; animation: float 4s ease-in-out infinite; filter: drop-shadow(0 20px 40px rgba(0,0,0,0.4)); }
 
   /* ── TOP GRID ── */
   .top-grid {
@@ -720,7 +735,7 @@ body { font-family: var(--font); color: var(--text); background: #fff; margin: 0
   }
   .top-item:last-child { border-bottom: none; }
   .top-item:hover { background: var(--light); margin: 0 -8px; padding: 12px 8px; border-radius: 6px; }
-  .top-item img { width: 64px; height: 64px; object-fit: cover; border-radius: 6px; background: var(--light); }
+  .top-item img { width: 64px; height: 64px; object-fit: contain; border-radius: 6px; background: var(--light); padding: 4px; }
   .top-item-info { flex: 1; min-width: 0; }
   .top-item-brand { font-size: 10px; color: var(--red); font-weight: 700; text-transform: uppercase; }
   .top-item-name { font-size: 13px; font-weight: 600; color: var(--dark); margin: 2px 0 4px; line-height: 1.3; }
@@ -1003,20 +1018,10 @@ body { font-family: var(--font); color: var(--text); background: #fff; margin: 0
     border-top: 1px solid rgba(255,255,255,0.06);
     width: 100%;
   }
-
-  /* ── PAYMENT BADGES ── */
-  .footer-payments { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
-  .payment-badge-wrap {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #fff;
-    border-radius: 6px;
-    padding: 4px 8px;
-    height: 28px;
-    min-width: 44px;
+  .footer-reg {
+    font-size: 12px;
+    color: rgba(255,255,255,0.35);
   }
-  .payment-badge-wrap svg { display: block; }
 
   /* ── TOAST ── */
   .toast {
@@ -1038,59 +1043,6 @@ body { font-family: var(--font); color: var(--text); background: #fff; margin: 0
     max-width: 320px;
   }
   .toast-icon { color: #22c55e; font-size: 18px; }
-
-  /* ── CART DRAWER ── */
-  .cart-overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.5);
-    z-index: 1100;
-    animation: fadeIn 0.3s;
-  }
-  .cart-drawer {
-    position: fixed;
-    top: 0; right: 0;
-    width: 380px;
-    height: 100%;
-    background: #fff;
-    z-index: 1101;
-    box-shadow: -8px 0 40px rgba(0,0,0,0.2);
-    display: flex;
-    flex-direction: column;
-    animation: slideRight 0.35s ease;
-  }
-  .cart-header {
-    background: var(--dark);
-    color: #fff;
-    padding: 20px 24px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-shrink: 0;
-  }
-  .cart-header h3 { font-family: var(--font-cond); font-size: 20px; font-weight: 800; letter-spacing: 0.5px; }
-  .cart-close { background: rgba(255,255,255,0.1); color: #fff; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 16px; cursor: pointer; transition: background 0.2s; border: none; }
-  .cart-close:hover { background: var(--red); }
-  .cart-items { flex: 1; overflow-y: auto; padding: 20px; }
-  .cart-item { display: flex; gap: 14px; padding: 14px 0; border-bottom: 1px solid var(--border); }
-  .cart-item img { width: 72px; height: 72px; object-fit: cover; border-radius: 6px; background: var(--light); }
-  .cart-item-info { flex: 1; }
-  .cart-item-name { font-size: 14px; font-weight: 600; color: var(--dark); margin-bottom: 4px; line-height: 1.3; }
-  .cart-item-qty { display: flex; align-items: center; gap: 8px; margin-top: 8px; }
-  .qty-btn { width: 26px; height: 26px; background: var(--light); border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700; cursor: pointer; transition: background 0.2s; border: none; color: var(--dark); }
-  .qty-btn:hover { background: var(--red); color: #fff; }
-  .qty-num { font-size: 14px; font-weight: 700; min-width: 20px; text-align: center; }
-  .cart-remove { background: none; color: var(--gray); cursor: pointer; font-size: 16px; border: none; margin-left: auto; align-self: flex-start; padding: 2px; transition: color 0.2s; }
-  .cart-remove:hover { color: var(--red); }
-  .cart-footer { padding: 20px 24px; border-top: 1px solid var(--border); flex-shrink: 0; }
-  .cart-total { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
-  .cart-total-label { font-size: 15px; font-weight: 600; color: var(--gray); }
-  .cart-total-price { font-size: 22px; font-weight: 900; color: var(--dark); }
-  .cart-checkout { width: 100%; background: var(--red); color: #fff; padding: 14px; border-radius: 6px; font-weight: 700; font-size: 15px; text-transform: uppercase; letter-spacing: 0.5px; transition: background 0.2s; border: none; cursor: pointer; font-family: var(--font); }
-  .cart-checkout:hover { background: var(--red-dark); }
-  .empty-cart { text-align: center; padding: 48px 20px; }
-  .empty-cart-icon { font-size: 56px; margin-bottom: 16px; }
-  .empty-cart p { color: var(--gray); font-size: 15px; }
 
   /* ── MOBILE NAV ── */
   .mobile-nav-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 1200; animation: fadeIn 0.3s; }
@@ -1125,7 +1077,7 @@ body { font-family: var(--font); color: var(--text); background: #fff; margin: 0
     .contact { grid-template-columns: 1fr; }
     .reviews-grid { grid-template-columns: 1fr 1fr; }
     .top-grid { grid-template-columns: 1fr; }
-    .deal-img { display: none; }
+    .dist-strip { gap: 20px; }
   }
   @media (max-width: 720px) {
     .header-inner { gap: 12px; }
@@ -1144,7 +1096,6 @@ body { font-family: var(--font); color: var(--text); background: #fff; margin: 0
     .topbar-left { flex-direction: column; gap: 4px; }
     .search-bar select { display: none; }
     .header-actions { gap: 14px; }
-    .cart-drawer { width: 100%; }
   }
   @media (max-width: 480px) {
     .products-grid { grid-template-columns: 1fr; }
@@ -1171,37 +1122,14 @@ const BrandLogos = {
       <text x="2" y="22" fontFamily="'SST', Arial, sans-serif" fontWeight="700" fontSize="22" fill="#000" letterSpacing="2">SONY</text>
     </svg>
   ),
-  Dell: () => (
-    <svg viewBox="0 0 70 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <text x="2" y="22" fontFamily="Arial, sans-serif" fontWeight="900" fontSize="22" fill="#007DB8" letterSpacing="1">DELL</text>
-    </svg>
-  ),
-  HP: () => (
-    <svg viewBox="0 0 60 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <rect x="0" y="2" width="28" height="28" rx="5" fill="#0096D6"/>
-      <text x="4" y="22" fontFamily="Arial, sans-serif" fontWeight="900" fontSize="18" fill="#fff">hp</text>
-    </svg>
-  ),
-  Lenovo: () => (
-    <svg viewBox="0 0 100 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <text x="2" y="22" fontFamily="Arial, sans-serif" fontWeight="900" fontSize="18" fill="#E2001A" letterSpacing="1">LENOVO</text>
-    </svg>
-  ),
-  Google: () => (
+  Dyson: () => (
     <svg viewBox="0 0 90 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <text x="2" y="22" fontFamily="'Product Sans', Arial, sans-serif" fontWeight="700" fontSize="20" fill="none">
-        <tspan fill="#4285F4">G</tspan><tspan fill="#EA4335">o</tspan><tspan fill="#FBBC05">o</tspan><tspan fill="#4285F4">g</tspan><tspan fill="#34A853">l</tspan><tspan fill="#EA4335">e</tspan>
-      </text>
+      <text x="2" y="22" fontFamily="Arial, sans-serif" fontWeight="900" fontSize="20" fill="#C00" letterSpacing="1">DYSON</text>
     </svg>
   ),
-  Bose: () => (
-    <svg viewBox="0 0 70 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <text x="2" y="22" fontFamily="Arial, sans-serif" fontWeight="900" fontSize="22" fill="#000" letterSpacing="2">BOSE</text>
-    </svg>
-  ),
-  OnePlus: () => (
-    <svg viewBox="0 0 90 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <text x="2" y="22" fontFamily="Arial, sans-serif" fontWeight="900" fontSize="18" fill="#F5010C" letterSpacing="0.5">OnePlus</text>
+  Nintendo: () => (
+    <svg viewBox="0 0 110 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <text x="2" y="21" fontFamily="Arial, sans-serif" fontWeight="900" fontSize="16" fill="#E4000F" letterSpacing="0.5">NINTENDO</text>
     </svg>
   ),
   Microsoft: () => (
@@ -1213,15 +1141,24 @@ const BrandLogos = {
       <text x="24" y="20" fontFamily="'Segoe UI', Arial, sans-serif" fontWeight="600" fontSize="14" fill="#333" letterSpacing="0">Microsoft</text>
     </svg>
   ),
-  Asus: () => (
-    <svg viewBox="0 0 72 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <text x="2" y="22" fontFamily="Arial, sans-serif" fontWeight="900" fontSize="22" fill="#00AEEF" letterSpacing="1">ASUS</text>
+  Gigabyte: () => (
+    <svg viewBox="0 0 100 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <text x="2" y="22" fontFamily="Arial, sans-serif" fontWeight="900" fontSize="16" fill="#E31E24" letterSpacing="0.5">GIGABYTE</text>
     </svg>
   ),
-  LG: () => (
-    <svg viewBox="0 0 55 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="14" cy="14" r="13" fill="none" stroke="#A50034" strokeWidth="2.5"/>
-      <text x="6" y="19" fontFamily="Arial, sans-serif" fontWeight="900" fontSize="15" fill="#A50034">LG</text>
+  PNY: () => (
+    <svg viewBox="0 0 70 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <text x="2" y="22" fontFamily="Arial, sans-serif" fontWeight="900" fontSize="22" fill="#003087" letterSpacing="2">PNY</text>
+    </svg>
+  ),
+  Xbox: () => (
+    <svg viewBox="0 0 80 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <text x="2" y="22" fontFamily="Arial, sans-serif" fontWeight="900" fontSize="20" fill="#107C10" letterSpacing="1">XBOX</text>
+    </svg>
+  ),
+  Braun: () => (
+    <svg viewBox="0 0 80 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <text x="2" y="22" fontFamily="Arial, sans-serif" fontWeight="900" fontSize="20" fill="#00478C" letterSpacing="1">BRAUN</text>
     </svg>
   ),
 };
@@ -1229,86 +1166,85 @@ const BrandLogos = {
 // ─── DATA ─────────────────────────────────────────────────────────────────────
 const NAV_LINKS = [
   { label: "Home", section: "home" },
-  { label: "Hot Deals", section: "hot-deals" },
+  { label: "Stock Lines", section: "hot-deals" },
   { label: "Products", section: "products" },
-  { label: "Laptops", section: "products" },
-  { label: "Smartphones", section: "products" },
-  { label: "Tablets", section: "products" },
-  { label: "Accessories", section: "products" },
+  { label: "Apple", section: "products" },
+  { label: "Gaming", section: "products" },
+  { label: "Audio", section: "products" },
+  { label: "Components", section: "products" },
   { label: "About", section: "about" },
   { label: "Contact", section: "contact" },
 ];
 
 const HERO_SLIDES = [
   {
-    tag: "New Arrivals 2025",
+    tag: "Available Now — Trade Pricing",
     title: "Apple MacBook Pro M4",
-    sub: "Experience next-generation performance. Up to 22hrs battery, stunning Liquid Retina display.",
+    sub: "Next-generation performance for professionals. Wholesale trade pricing for authorised buyers.",
     img: "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=1200&q=80",
-    cta: "Shop Apple",
+    cta: "Request Trade Pricing",
   },
   {
-    tag: "Hot Deal This Week",
-    title: "Samsung Galaxy S25 Ultra",
-    sub: "The ultimate Android flagship. AI-powered camera, titanium build, and all-day battery.",
-    img: "https://images.unsplash.com/photo-1610945415295-d9bbf067e59c?w=1200&q=80",
-    cta: "Shop Samsung",
+    tag: "Bulk Distribution",
+    title: "Nintendo Switch 2",
+    sub: "The next generation of Nintendo gaming. Bulk distribution pricing for trade accounts.",
+    img: "https://images.unsplash.com/photo-1578303512597-81e6cc155b3e?w=1200&q=80",
+    cta: "Contact Our Team",
   },
   {
-    tag: "Premium Audio",
-    title: "Sony WH-1000XM6 Headphones",
-    sub: "Industry-leading noise cancellation. 40-hour battery and crystal-clear call quality.",
-    img: "https://images.unsplash.com/photo-1761005654126-6d512251d7a3?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8U29ueSUyMFdILTEwMDBYTTYlMjBIZWFkcGhvbmVzfGVufDB8fDB8fHww",
-    cta: "Shop Sony",
+    tag: "Premium Audio — Wholesale",
+    title: "Sony WH-1000XM5",
+    sub: "Industry-leading noise cancellation. Competitive wholesale pricing for trade partners.",
+    img: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=1200&q=80",
+    cta: "Get Trade Pricing",
   },
 ];
 
-// Category banners — discount/badge labels removed
 const CAT_BANNERS = [
   {
-    title: "Laptop\nCollection",
-    img: "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=800&q=80",
-    cat: "Laptops",
+    title: "Apple Products",
+    icon: "🍎",
+    sub: "MacBooks · iPhones · iPads · AirPods",
+    cat: "Apple",
     section: "products",
   },
   {
-    title: "Accessories\nCollection",
-    img: "https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?w=800&q=80",
-    cat: "Accessories",
+    title: "Gaming & Consoles",
+    icon: "🎮",
+    sub: "PlayStation · Nintendo · Xbox",
+    cat: "Gaming",
     section: "products",
   },
   {
-    title: "Tablets\nCollection",
-    img: "https://images.unsplash.com/photo-1561154464-82e9adf32764?w=800&q=80",
-    cat: "Tablets",
+    title: "PC Components",
+    icon: "🖥️",
+    sub: "GPUs · Storage · Peripherals",
+    cat: "Components",
     section: "products",
   },
 ];
 
 const PRODUCTS = {
-  Laptops: [
-    { id: 1, brand: "Apple", name: 'MacBook Pro 14" M4 Pro', img: "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=500&q=80", rating: 5, badge: "Hot" },
-    { id: 2, brand: "Dell", name: "XPS 15 OLED Intel Core Ultra 9", img: "https://images.unsplash.com/photo-1593642632559-0c6d3fc62b89?w=500&q=80", rating: 4, badge: "Sale" },
-    { id: 3, brand: "HP", name: "Spectre x360 14 2-in-1 Laptop", img: "https://images.unsplash.com/photo-1541807084-5c52b6b3adef?w=500&q=80", rating: 4, badge: "New" },
-    { id: 4, brand: "Lenovo", name: "ThinkPad X1 Carbon Gen 12", img: "https://images.unsplash.com/photo-1587614382346-4ec70e388b28?w=500&q=80", rating: 5, badge: "Sale" },
+  Apple: [
+    { id: 1,  brand: "Apple",   name: "MacBook Air M3 13\"",                      ean: "",                  img: "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=500&q=80", badge: "In Stock" },
+    { id: 2,  brand: "Apple",   name: "MacBook Pro M4 14\"",                      ean: "",                  img: "https://images.unsplash.com/photo-1541807084-5c52b6b3adef?w=500&q=80", badge: "New" },
+    { id: 3,  brand: "Apple",   name: "AirPods 4 with Active Noise Cancellation", ean: "MXP93ZM/A",         img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQSn4HrB5N3P29xaidxzzX--0AeON14f0c0g&s", badge: "In Stock" },
+    { id: 4,  brand: "Apple",   name: "Apple Pencil Pro",                         ean: "MX2D3ZM/A",         img: "https://images.unsplash.com/photo-1638038857726-966d68eeb616?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fEFwcGxlJTIwUGVuY2lsJTIwUHJvfGVufDB8fDB8fHww", badge: "In Stock" },
   ],
-  Smartphones: [
-    { id: 5, brand: "Apple", name: "iPhone 16 Pro Max 256GB", img: "https://images.unsplash.com/photo-1738344858158-66f743afcf3d?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fGlQaG9uZSUyMDE2JTIwUHJvJTIwTWF4fGVufDB8fDB8fHww", rating: 5, badge: "Hot" },
-    { id: 6, brand: "Samsung", name: "Galaxy S25 Ultra 512GB", img: "https://images.unsplash.com/photo-1610945415295-d9bbf067e59c?w=500&q=80", rating: 5, badge: "New" },
-    { id: 7, brand: "Google", name: "Pixel 9 Pro XL 256GB", img: "https://images.unsplash.com/photo-1724341039339-036842055cae?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fGdvb2dsZSUyMHBpeGVsJTIwOXxlbnwwfHwwfHx8MA%3D%3D", rating: 4, badge: "Sale" },
-    { id: 8, brand: "OnePlus", name: "OnePlus 13 5G 512GB", img: "https://images.unsplash.com/photo-1757847505222-cfe856c93be0?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8b25lUGx1cyUyMDEzfGVufDB8fDB8fHww", rating: 4, badge: "New" },
+  Gaming: [
+    { id: 5,  brand: "Sony",    name: "PS5 Console Digital Edition Slim 825GB",   ean: "",                  img: "https://images.unsplash.com/photo-1606813907291-d86efa9b94db?w=500&q=80", badge: "Limited" },
+    { id: 6,  brand: "Nintendo",name: "Nintendo Switch 2",                        ean: "",                  img: "https://images.unsplash.com/photo-1578303512597-81e6cc155b3e?w=500&q=80", badge: "New" },
+    { id: 7,  brand: "Microsoft",name: "Xbox Series X",                           ean: "",                  img: "https://images.unsplash.com/photo-1621259182978-fbf93132d53d?w=500&q=80", badge: "In Stock" },
+    { id: 8,  brand: "Sony",    name: "DS5 Controllers",                          ean: "",                  img: "https://images.unsplash.com/photo-1774105416451-14ca0ff4e953?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8RFM1JTIwQ29udHJvbGxlcnN8ZW58MHx8MHx8fDA%3D", badge: "In Stock" },
   ],
-  Tablets: [
-    { id: 9, brand: "Apple", name: "iPad Pro 13\" M4 Wi-Fi 256GB", img: "https://images.unsplash.com/photo-1561154464-82e9adf32764?w=500&q=80", rating: 5, badge: "Hot" },
-    { id: 10, brand: "Samsung", name: "Galaxy Tab S10 Ultra 14.6\"", img: "https://images.unsplash.com/photo-1545454675-3531b543be5d?w=500&q=80", rating: 4, badge: "Sale" },
-    { id: 11, brand: "Microsoft", name: "Surface Pro 11 Copilot+ PC", img: "https://images.unsplash.com/photo-1593642632559-0c6d3fc62b89?w=500&q=80", rating: 5, badge: "New" },
-    { id: 12, brand: "Lenovo", name: "Tab Extreme 14.5\" 3K AMOLED", img: "https://images.unsplash.com/photo-1587614382346-4ec70e388b28?w=500&q=80", rating: 4, badge: "Sale" },
+  Audio: [
+    { id: 9,  brand: "Sony",    name: "WH-1000XM5 Wireless Headphones + Softcase",ean: "",                  img: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500&q=80", badge: "In Stock" },
+    { id: 10, brand: "Dyson",   name: "Dyson HS08 Airwrap Complete",              ean: "",                  img: "https://images.unsplash.com/photo-1522338242992-e1a54906a8da?w=500&q=80", badge: "New" },
+    { id: 11, brand: "Braun",   name: "ThermoScan IRT3030 Ear Thermometer",       ean: "4022167330307",     img: "https://images.unsplash.com/photo-1631549916768-4119b2e5f926?w=500&q=80", badge: "In Stock" },
   ],
-  Accessories: [
-    { id: 13, brand: "Sony", name: "WH-1000XM6 Wireless Headphones", img: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500&q=80", rating: 5, badge: "Hot" },
-    { id: 14, brand: "Apple", name: "AirPods Pro (3rd Generation)", img: "https://images.unsplash.com/photo-1588423771073-b8903fead714?w=500&q=80", rating: 5, badge: "New" },
-    { id: 15, brand: "Samsung", name: "Galaxy Watch 7 Pro 47mm", img: "https://images.unsplash.com/photo-1544117519-31a4b719223d?w=500&q=80", rating: 4, badge: "Sale" },
-    { id: 16, brand: "Bose", name: "QuietComfort Ultra Earbuds", img: "https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=500&q=80", rating: 5, badge: "New" },
+  Components: [
+    { id: 12, brand: "Gigabyte",name: "GeForce RTX 5090 Graphics Card",           ean: "",                  img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-sn3HDft7eoMtcmN_tPkg4L_O9UQ-z12d1A&s", badge: "Limited" },
+    { id: 13, brand: "PNY",     name: "GeForce RTX 5090 Triple Fan",              ean: "",                  img: "https://images.unsplash.com/photo-1587202372775-e229f172b9d7?w=500&q=80", badge: "New" },
   ],
 };
 
@@ -1316,86 +1252,50 @@ const ALL_PRODUCTS = Object.values(PRODUCTS).flat();
 
 const TOP_COLS = [
   {
-    label: "Laptops",
+    label: "Apple",
     items: [
-      { brand: "Apple", name: 'MacBook Air M3 13"', img: "https://images.unsplash.com/photo-1710905219584-8521769e3678?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fE1hY0Jvb2slMjBBaXIlMjBNMyUyMDEzfGVufDB8fDB8fHww" },
-      { brand: "Samsung", name: "Galaxy Book4 Pro 360", img: "https://images.unsplash.com/photo-1721864429261-3059e48c056b?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8R2FsYXh5JTIwbGFwdG9wJTIwMzYwfGVufDB8fDB8fHww" },
-      { brand: "Lenovo", name: "IdeaPad 5 Pro 14\" OLED", img: "https://images.unsplash.com/photo-1587614382346-4ec70e388b28?w=200&q=70" },
+      { brand: "Apple",  name: "MacBook Pro M4 14\"",           img: "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=200&q=70" },
+      { brand: "Apple",  name: "AirPods 4 ANC (MXP93ZM/A)",     img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRk7RtYLyNwu2kyz7uW5H_ZyA6CaQzv8iCAg&s" },
+      { brand: "Apple",  name: "Apple Pencil Pro (MX2D3ZM/A)",  img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQy3nFOPhviwjvAocSN-ykoZVs32sOq3to4oA&s" },
     ],
   },
   {
-    label: "Smartphones",
+    label: "Gaming",
     items: [
-      { brand: "Apple", name: "iPhone 16 Pro Max 256GB", img: "https://images.unsplash.com/photo-1726587912121-ea21fcc57ff8?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8aVBob25lJTIwMTYlMjBQcm8lMjBNYXh8ZW58MHx8MHx8fDA%3D" },
-      { brand: "Samsung", name: "Galaxy S25 Ultra 512GB", img: "https://images.unsplash.com/photo-1610945415295-d9bbf067e59c?w=200&q=70" },
-      { brand: "Google", name: "Pixel 9 Pro XL 256GB", img: "https://images.unsplash.com/photo-1727132527153-683df2c70cd6?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8UGl4ZWwlMjA5JTIwUHJvJTIwWEx8ZW58MHx8MHx8fDA%3D" },
+      { brand: "Sony",      name: "PS5 Digital Edition Slim 825GB", img: "https://images.unsplash.com/photo-1606813907291-d86efa9b94db?w=200&q=70" },
+      { brand: "Nintendo",  name: "Nintendo Switch 2",              img: "https://images.unsplash.com/photo-1578303512597-81e6cc155b3e?w=200&q=70" },
+      { brand: "Microsoft", name: "Xbox Series X",                  img: "https://images.unsplash.com/photo-1621259182978-fbf93132d53d?w=200&q=70" },
     ],
   },
   {
-    label: "Tablets",
+    label: "Components",
     items: [
-      { brand: "Apple", name: 'iPad Pro 13" M4 Wi-Fi', img: "https://images.unsplash.com/photo-1561154464-82e9adf32764?w=200&q=70" },
-      { brand: "Samsung", name: "Galaxy Tab S10 Ultra", img: "https://images.unsplash.com/photo-1527698266440-12104e498b76?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fFRhYmxldHxlbnwwfHwwfHx8MA%3D%3D" },
-      { brand: "Microsoft", name: "Surface Pro 11", img: "https://images.unsplash.com/photo-1593642632559-0c6d3fc62b89?w=200&q=70" },
+      { brand: "Gigabyte", name: "GeForce RTX 5090",           img: "https://images.unsplash.com/photo-1591488320449-011701bb6704?w=200&q=70" },
+      { brand: "PNY",      name: "GeForce RTX 5090 Triple Fan",img: "https://images.unsplash.com/photo-1587202372775-e229f172b9d7?w=200&q=70" },
+      { brand: "Sony",     name: "DS5 Controllers",            img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-LYeuR_kxdkLkXktya6u6rfRQWTi7NanahA&s" },
     ],
   },
 ];
 
 const REVIEWS = [
-  { name: "James Thornton", loc: "London, UK", text: "Absolutely brilliant service. Got my Dell XPS next day and the price was the best I could find anywhere online. Will definitely be ordering again for the office fleet.", stars: 5, img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&q=70" },
-  { name: "Sarah Mitchell", loc: "Manchester, UK", text: "Ordered an Apple MacBook Pro for my daughter's university. Delivery was fast and the packaging was immaculate. Banwell Wholesale really impressed me.", stars: 5, img: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&q=70" },
-  { name: "David Okafor", loc: "Birmingham, UK", text: "Great wholesale prices on Sony headphones. Bought 10 units for my retail shop and the margin is excellent. Professional and reliable company.", stars: 5, img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&q=70" },
-  { name: "Emma Clarke", loc: "Bristol, UK", text: "The Samsung Galaxy S25 I ordered arrived perfectly sealed and at a price £200 cheaper than any high street retailer. Couldn't be happier!", stars: 5, img: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&q=70" },
-  { name: "Amir Patel", loc: "Leeds, UK", text: "As a reseller I rely on consistent pricing and stock. Banwell has never let me down. Their account management team is responsive and helpful.", stars: 5, img: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&q=70" },
-  { name: "Charlotte Hughes", loc: "Edinburgh, UK", text: "Bought an HP Spectre as a birthday gift and the unboxing experience was perfect. Arrived in two days with great packaging. Highly recommend!", stars: 5, img: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100&q=70" },
+  { name: "James Thornton", loc: "London, UK", text: "Absolutely brilliant service. Got my stock of MacBook Pros next day and the pricing was the best I could find anywhere. Will definitely be ordering again for the office fleet.", img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&q=70" },
+  { name: "Sarah Mitchell", loc: "Manchester, UK", text: "Ordered bulk AirPods 4 for our retail chain. Delivery was fast and the packaging was immaculate. Banwell Wholesale really impressed me with their professionalism.", img: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&q=70" },
+  { name: "David Okafor", loc: "Birmingham, UK", text: "Great wholesale prices on the RTX 5090 cards. Bought 10 units for my retail shop and the margin is excellent. Professional and reliable distributor.", img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&q=70" },
+  { name: "Emma Clarke", loc: "Bristol, UK", text: "The Nintendo Switch 2 units I ordered arrived perfectly sealed. As a reseller I rely on consistent pricing and stock — Banwell has never let me down.", img: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&q=70" },
+  { name: "Amir Patel", loc: "Leeds, UK", text: "As a trade buyer I rely on fast fulfilment and authentic stock. Their PS5 Digital Edition Slim units have been a top seller. Highly recommended distributor.", img: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&q=70" },
+  { name: "Charlotte Hughes", loc: "Edinburgh, UK", text: "Bought the Sony WH-1000XM5 headphones in bulk. Arrived in two days with great packaging. Reliable and professional throughout.", img: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100&q=70" },
 ];
 
 const FEATURES = [
-  { icon: "🚚", title: "Free UK Delivery", text: "Free next-day delivery on all orders over £500. Express same-day available in London." },
-  { icon: "🔒", title: "Secure Payments", text: "Bank-level encryption protects every transaction. We accept BACS, cards & trade accounts." },
-  { icon: "↩️", title: "30-Day Returns", text: "Not satisfied? Return any item within 30 days for a full refund, no questions asked." },
-  { icon: "🏆", title: "Authorised Reseller", text: "Official UK distributor for all major brands. Every product is genuine and warranty-backed." },
+  { icon: "🚚", title: "Free UK Delivery", text: "Free next-day delivery on all trade orders over £500. Express same-day available in London." },
+  { icon: "🔒", title: "Secure Trade Terms", text: "Bank-level encryption on all transactions. We accept BACS, bank transfer & trade credit accounts." },
+  { icon: "↩️", title: "30-Day Returns", text: "Not satisfied? Return any item within 30 days for a full refund. Simple, no-hassle process." },
+  { icon: "🏆", title: "Authorised Distributor", text: "Official UK distributor for all major brands. Every product is genuine and UK warranty-backed." },
 ];
 
-const BRAND_LIST = ["Apple", "Samsung", "Sony", "Dell", "HP", "Lenovo", "Google", "Bose", "OnePlus", "Microsoft", "Asus", "LG"];
-
-// ─── PAYMENT SVG LOGOS ────────────────────────────────────────────────────────
-const PaymentVisa = () => (
-  <svg width="44" height="16" viewBox="0 0 44 16" fill="none">
-    <text x="0" y="13" fontFamily="Arial, sans-serif" fontWeight="900" fontSize="14" fill="#1A1F71" letterSpacing="1">VISA</text>
-  </svg>
-);
-const PaymentMastercard = () => (
-  <svg width="36" height="22" viewBox="0 0 36 22" fill="none">
-    <circle cx="13" cy="11" r="11" fill="#EB001B"/>
-    <circle cx="23" cy="11" r="11" fill="#F79E1B"/>
-    <path d="M18 3.8a11 11 0 0 1 0 14.4A11 11 0 0 1 18 3.8z" fill="#FF5F00"/>
-  </svg>
-);
-const PaymentAmex = () => (
-  <svg width="44" height="16" viewBox="0 0 44 16" fill="none">
-    <text x="0" y="13" fontFamily="Arial, sans-serif" fontWeight="900" fontSize="11" fill="#007BC1" letterSpacing="0.5">AMEX</text>
-  </svg>
-);
-const PaymentPayPal = () => (
-  <svg width="56" height="16" viewBox="0 0 56 16" fill="none">
-    <text x="0" y="13" fontFamily="Arial, sans-serif" fontWeight="900" fontSize="13" fill="#003087">Pay</text>
-    <text x="22" y="13" fontFamily="Arial, sans-serif" fontWeight="900" fontSize="13" fill="#009CDE">Pal</text>
-  </svg>
-);
-const PaymentBACS = () => (
-  <svg width="44" height="16" viewBox="0 0 44 16" fill="none">
-    <text x="0" y="13" fontFamily="Arial, sans-serif" fontWeight="900" fontSize="12" fill="#0A3D62" letterSpacing="0.5">BACS</text>
-  </svg>
-);
+const BRAND_LIST = ["Apple", "Sony", "Nintendo", "Microsoft", "Gigabyte", "PNY", "Dyson", "Braun", "Xbox"];
 
 // ─── HELPERS ──────────────────────────────────────────────────────────────────
-const Stars = ({ n }) => (
-  <div className="product-stars">
-    {[1,2,3,4,5].map(i => <span key={i} className={`star${i>n?" empty":""}`}>★</span>)}
-  </div>
-);
-
 const scrollToSection = (sectionId) => {
   const el = document.getElementById(sectionId);
   if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -1421,37 +1321,43 @@ const SiteLogo = ({ onClick }) => {
   );
 };
 
-// ─── PRODUCT CARD ─────────────────────────────────────────────────────────────
-const ProductCard = ({ p, onAdd, delay = 0 }) => (
-  <div className="product-card" style={{ animationDelay: `${delay}ms` }}>
-    <div className="product-img-wrap">
-      <img src={p.img} alt={p.name} loading="lazy" />
-      {p.badge && <div className={`product-badge${p.badge==="New"?" new":""}`}>{p.badge}</div>}
-      <div className="product-actions">
-        <button className="action-btn" title="Wishlist">♡</button>
-        <button className="action-btn" title="Quick View">⊙</button>
+// ─── PRODUCT CARD — B2B Style ─────────────────────────────────────────────────
+const ProductCard = ({ p, onContact, delay = 0 }) => {
+  const isLimited = p.badge === "Limited";
+  const isNew = p.badge === "New";
+
+  return (
+    <div className="product-card" style={{ animationDelay: `${delay}ms` }}>
+      <div className="product-img-wrap">
+        <img src={p.img} alt={p.name} loading="lazy" />
+        {isNew && <div className="product-badge new">New Stock</div>}
+        {isLimited && <div className="product-badge" style={{ background: "#b45309" }}>Limited Stock</div>}
+        {!isNew && !isLimited && <div className="product-badge available">In Stock</div>}
+      </div>
+      <div className="product-info">
+        <div className="product-brand">{p.brand}</div>
+        <div className="product-name">{p.name}</div>
+        {p.ean && <div className="product-ean">EAN: {p.ean}</div>}
+        <div className={`product-availability${isLimited ? " limited" : ""}`}>
+          {isLimited ? "⚠ Limited Availability" : "✓ Available for Trade Orders"}
+        </div>
+        <button className="contact-btn" onClick={() => onContact(p)}>
+          Contact for Pricing →
+        </button>
       </div>
     </div>
-    <div className="product-info">
-      <div className="product-brand">{p.brand}</div>
-      <div className="product-name">{p.name}</div>
-      <Stars n={p.rating} />
-      <button className="add-to-cart" onClick={() => onAdd(p)}>+ Enquire / Add to Cart</button>
-    </div>
-  </div>
-);
+  );
+};
 
 // ─── MAIN APP ─────────────────────────────────────────────────────────────────
 export default function BanwellWholesale() {
   const [activeNav, setActiveNav] = useState("Home");
   const [heroIdx, setHeroIdx] = useState(0);
-  const [productTab, setProductTab] = useState("Laptops");
-  const [cart, setCart] = useState([]);
-  const [cartOpen, setCartOpen] = useState(false);
+  const [productTab, setProductTab] = useState("Apple");
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const [toast, setToast] = useState(null);
   const [countdown, setCountdown] = useState({ d: 2, h: 9, m: 47, s: 33 });
-  const [form, setForm] = useState({ name: "", email: "", phone: "", subject: "General Enquiry", message: "" });
+  const [form, setForm] = useState({ name: "", email: "", company: "", phone: "", subject: "Trade Account Enquiry", message: "" });
   const [formSent, setFormSent] = useState(false);
   const [newsletter, setNewsletter] = useState("");
   const heroTimer = useRef(null);
@@ -1488,28 +1394,21 @@ export default function BanwellWholesale() {
     setTimeout(() => setToast(null), 3000);
   };
 
-  const addToCart = (p) => {
-    setCart(c => {
-      const ex = c.find(x => x.id === p.id);
-      if (ex) return c.map(x => x.id === p.id ? { ...x, qty: x.qty + 1 } : x);
-      return [...c, { ...p, qty: 1 }];
-    });
-    showToast(`${p.brand} ${p.name.split(" ").slice(0,3).join(" ")} added to cart`);
+  const handleContactProduct = (p) => {
+    setForm(f => ({
+      ...f,
+      subject: "Product Pricing Enquiry",
+      message: `Hi, I'm interested in trade pricing for:\n\n${p.brand} ${p.name}${p.ean ? ` (EAN: ${p.ean})` : ""}\n\nPlease could you provide wholesale pricing and availability for [quantity] units?\n\nThank you.`
+    }));
+    scrollToSection("contact");
+    showToast("Scroll down to complete your enquiry");
   };
-
-  const updateQty = (id, delta) => {
-    setCart(c => c.map(x => x.id === id ? { ...x, qty: Math.max(1, x.qty + delta) } : x));
-  };
-
-  const removeItem = (id) => setCart(c => c.filter(x => x.id !== id));
-
-  const cartCount = cart.reduce((s, x) => s + x.qty, 0);
 
   const handleFormChange = (e) => setForm(f => ({ ...f, [e.target.name]: e.target.value }));
 
   const handleFormSubmit = () => {
     if (!form.name || !form.email || !form.message) { showToast("Please fill in all required fields"); return; }
-    const mailto = `mailto:info@banwellwholesale.co.uk?subject=${encodeURIComponent(`[${form.subject}] from ${form.name}`)}&body=${encodeURIComponent(`Name: ${form.name}\nEmail: ${form.email}\nPhone: ${form.phone}\n\nMessage:\n${form.message}`)}`;
+    const mailto = `mailto:info@banwellwholesale.co.uk?subject=${encodeURIComponent(`[${form.subject}] from ${form.name}${form.company ? ` — ${form.company}` : ""}`)}&body=${encodeURIComponent(`Name: ${form.name}\nCompany: ${form.company}\nEmail: ${form.email}\nPhone: ${form.phone}\n\nMessage:\n${form.message}`)}`;
     window.location.href = mailto;
     setFormSent(true);
     showToast("Opening your email client…");
@@ -1518,13 +1417,13 @@ export default function BanwellWholesale() {
   const handleNavClick = (link) => {
     setActiveNav(link.label);
     setMobileNavOpen(false);
-    if (["Laptops","Smartphones","Tablets","Accessories"].includes(link.label)) {
+    if (["Apple","Gaming","Audio","Components"].includes(link.label)) {
       setProductTab(link.label);
     }
     scrollToSection(link.section);
   };
 
-  const tickerText = "🔥 HOT DEALS — Apple MacBook Pro M4 · Samsung Galaxy S25 Ultra · Sony WH-1000XM6 · Dell XPS 15 · Free Next-Day Delivery Over £500 · Trade Accounts Available · Call +44 7777 664194 · iPad Pro M4 · HP Spectre x360 · Lenovo ThinkPad X1 · Microsoft Surface Pro 11 · ";
+  const tickerText = "🏭 AUTHORISED UK DISTRIBUTOR — Apple MacBook Pro M4 · PS5 Digital Edition Slim · Nintendo Switch 2 · RTX 5090 · AirPods 4 ANC · Sony WH-1000XM5 · Xbox Series X · Dyson HS08 · Free Delivery Over £500 · Trade Accounts Available · Call +44 7777 664194 · Bulk Orders Welcome · ";
 
   return (
     <div id="home" style={{ width: "100vw", maxWidth: "100vw", overflowX: "hidden", position: "relative", left: "50%", right: "50%", marginLeft: "-50vw", marginRight: "-50vw" }}>
@@ -1537,7 +1436,7 @@ export default function BanwellWholesale() {
           <div className="topbar-left">
             <span>📞 <a href="tel:+447777664194">+44 7777 664194</a></span>
             <span>✉️ <a href="mailto:info@banwellwholesale.co.uk">info@banwellwholesale.co.uk</a></span>
-            <span>📍 Flat 5, 13 Thornhill Road, Croydon, CR0 2XZ</span>
+            <span>📍 Unit 5 Vale Industrial Centre, Southern Road, Aylesbury, HP19 9EW</span>
           </div>
           <div className="topbar-right">
             <span>Free Delivery Over £500</span>
@@ -1555,33 +1454,28 @@ export default function BanwellWholesale() {
             onClick={() => setMobileNavOpen(true)}
           >☰</button>
 
-          {/* LOGO — loads /public/logo.jpeg, falls back to styled text */}
           <SiteLogo onClick={() => scrollToSection("home")} />
 
           <div className="search-bar">
             <select>
               <option>All Categories</option>
-              <option>Laptops</option>
-              <option>Smartphones</option>
-              <option>Tablets</option>
-              <option>Accessories</option>
+              <option>Apple</option>
+              <option>Gaming</option>
+              <option>Audio</option>
+              <option>Components</option>
             </select>
-            <input type="text" placeholder="Search products, brands…" />
+            <input type="text" placeholder="Search products, brands, EAN codes…" />
             <button>Search</button>
           </div>
 
           <div className="header-actions">
-            <div className="header-action" onClick={() => setCartOpen(true)}>
-              <span style={{ position: "relative" }}>
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
-                  <line x1="3" y1="6" x2="21" y2="6"/>
-                  <path d="M16 10a4 4 0 0 1-8 0"/>
-                </svg>
-                {cartCount > 0 && <span className="badge">{cartCount}</span>}
-              </span>
-              <span>Your Cart</span>
-            </div>
+            <button
+              className="btn-primary"
+              style={{ padding: "10px 20px", fontSize: "13px", whiteSpace: "nowrap" }}
+              onClick={() => scrollToSection("contact")}
+            >
+              Open a Trade Account
+            </button>
           </div>
         </div>
       </header>
@@ -1596,6 +1490,15 @@ export default function BanwellWholesale() {
           ))}
         </div>
       </nav>
+
+      {/* ── DISTRIBUTION TRUST STRIP ── */}
+      <div className="dist-strip">
+        <div className="dist-strip-item"><span>✅</span> 100% Genuine Stock</div>
+        <div className="dist-strip-item"><span>🏭</span> Authorised UK Distributor</div>
+        <div className="dist-strip-item"><span>📦</span> Bulk & Trade Orders</div>
+        <div className="dist-strip-item"><span>🔐</span> Full UK Warranty</div>
+        <div className="dist-strip-item"><span>📋</span> Trade Accounts Available</div>
+      </div>
 
       {/* ── TICKER ── */}
       <div className="ticker">
@@ -1617,8 +1520,8 @@ export default function BanwellWholesale() {
                 <h1 className="hero-title">{s.title}</h1>
                 <p className="hero-sub">{s.sub}</p>
                 <div className="hero-btns">
-                  <button className="btn-primary" onClick={() => { setProductTab("Laptops"); scrollToSection("products"); }}>{s.cta} →</button>
-                  <button className="btn-outline" onClick={() => scrollToSection("hot-deals")}>View All Deals</button>
+                  <button className="btn-primary" onClick={() => scrollToSection("contact")}>{s.cta} →</button>
+                  <button className="btn-outline" onClick={() => scrollToSection("products")}>View Stock Lines</button>
                 </div>
               </div>
             )}
@@ -1635,44 +1538,45 @@ export default function BanwellWholesale() {
         </div>
       </div>
 
-      {/* ── NEW PRODUCTS (moved before category banners) ── */}
+      {/* ── PRODUCTS ── */}
       <div className="section" id="products">
         <div className="section-header">
-          <div className="section-title">New Products</div>
+          <div className="section-title">Trade Stock Lines</div>
           <div className="section-tabs">
             {Object.keys(PRODUCTS).map(k => (
               <button key={k} className={`tab-btn${productTab===k?" active":""}`} onClick={() => setProductTab(k)}>{k}</button>
             ))}
           </div>
-          <div className="view-all">View All →</div>
+          <div className="view-all" onClick={() => scrollToSection("contact")}>Request Full Catalogue →</div>
         </div>
         <div className="products-grid">
           {PRODUCTS[productTab].map((p, i) => (
-            <ProductCard key={p.id} p={p} onAdd={addToCart} delay={i * 80} />
+            <ProductCard key={p.id} p={p} onContact={handleContactProduct} delay={i * 80} />
           ))}
         </div>
       </div>
 
-      {/* ── CATEGORY BANNERS (now in the middle — after products) ── */}
+      {/* ── CATEGORY BANNERS ── */}
       <div className="cat-banners">
         {CAT_BANNERS.map((c, i) => (
-          <div key={i} className="cat-banner" onClick={() => { setProductTab(c.cat); scrollToSection("products"); }} style={{ animationDelay: `${i*100}ms` }}>
-            <img src={c.img} alt={c.title} />
+          <div key={i} className="cat-banner" onClick={() => { setProductTab(c.cat); scrollToSection("products"); }}>
             <div className="cat-banner-overlay">
-              <div className="cat-banner-title" style={{ whiteSpace: "pre-line" }}>{c.title}</div>
-              <div className="cat-banner-link">Shop Now →</div>
+              <div className="cat-banner-icon">{c.icon}</div>
+              <div className="cat-banner-title">{c.title}</div>
+              <div style={{ color: "rgba(255,255,255,0.7)", fontSize: 12, marginBottom: 10 }}>{c.sub}</div>
+              <div className="cat-banner-link">View Stock Lines →</div>
             </div>
           </div>
         ))}
       </div>
 
-      {/* ── HOT DEALS / DEAL BANNER ── */}
+      {/* ── STOCK AVAILABILITY BANNER ── */}
       <div className="deal-banner" id="hot-deals">
         <div className="deal-inner">
           <div className="deal-text">
-            <div className="deal-label">🔥 Limited Time Offer</div>
-            <h2 className="deal-title">Hot Deal <span>This Week</span></h2>
-            <p className="deal-sub">New collection — up to 50% off on selected brands</p>
+            <div className="deal-label">📦 New Stock Available</div>
+            <h2 className="deal-title">Weekly <span>Stock Update</span></h2>
+            <p className="deal-sub">Fresh trade lines arriving weekly — competitive wholesale pricing for authorised partners</p>
             <div className="countdown">
               {[
                 { num: String(countdown.d).padStart(2,"0"), label: "Days" },
@@ -1686,19 +1590,45 @@ export default function BanwellWholesale() {
                 </div>
               ))}
             </div>
-            <button className="btn-primary" style={{ marginTop: 28 }} onClick={() => scrollToSection("products")}>Shop Hot Deals →</button>
+            <p style={{ color: "rgba(255,255,255,0.5)", fontSize: 13, marginTop: 12 }}>Until next stock update</p>
+            <button className="btn-primary" style={{ marginTop: 24 }} onClick={() => scrollToSection("contact")}>Request Trade Pricing →</button>
           </div>
-          <div className="deal-img">
-            <img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=400&q=80" alt="Deal product" />
+
+          {/* Stock summary panel instead of retail product image */}
+          <div style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.12)", borderRadius: 12, padding: "28px 32px", minWidth: 260 }}>
+            <div style={{ color: "rgba(255,255,255,0.5)", fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: 1, marginBottom: 16 }}>Currently In Stock</div>
+            {[
+              { brand: "Apple", name: "MacBook Pro M4 14\"", status: "Available" },
+              { brand: "Nintendo", name: "Switch 2", status: "Limited" },
+              { brand: "Sony", name: "PS5 Slim Digital", status: "Available" },
+              { brand: "Gigabyte", name: "RTX 5090", status: "Limited" },
+              { brand: "Sony", name: "WH-1000XM5", status: "Available" },
+            ].map((item, i) => (
+              <div key={i} style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "10px 0", borderBottom: i < 4 ? "1px solid rgba(255,255,255,0.07)" : "none" }}>
+                <div>
+                  <div style={{ color: "rgba(255,255,255,0.45)", fontSize: 10, fontWeight: 700, textTransform: "uppercase", letterSpacing: 0.5 }}>{item.brand}</div>
+                  <div style={{ color: "#fff", fontSize: 13, fontWeight: 600, marginTop: 2 }}>{item.name}</div>
+                </div>
+                <span style={{
+                  fontSize: 11, fontWeight: 700, padding: "3px 10px", borderRadius: 4,
+                  background: item.status === "Available" ? "rgba(22,163,74,0.2)" : "rgba(180,83,9,0.2)",
+                  color: item.status === "Available" ? "#4ade80" : "#fbbf24",
+                  border: `1px solid ${item.status === "Available" ? "rgba(22,163,74,0.3)" : "rgba(180,83,9,0.3)"}`,
+                }}>{item.status}</span>
+              </div>
+            ))}
+            <button className="btn-primary" style={{ width: "100%", marginTop: 20, fontSize: 13, padding: "10px" }} onClick={() => scrollToSection("contact")}>
+              Contact for Full List →
+            </button>
           </div>
         </div>
       </div>
 
-      {/* ── TOP SELLING ── */}
+      {/* ── POPULAR LINES ── */}
       <div className="section">
         <div className="section-header">
-          <div className="section-title">Top Selling</div>
-          <div className="view-all" onClick={() => scrollToSection("products")}>View All →</div>
+          <div className="section-title">Popular Trade Lines</div>
+          <div className="view-all" onClick={() => scrollToSection("products")}>View All Stock →</div>
         </div>
         <div className="top-grid">
           {TOP_COLS.map((col, ci) => (
@@ -1711,6 +1641,7 @@ export default function BanwellWholesale() {
                     <div className="top-item-brand">{item.brand}</div>
                     <div className="top-item-name">{item.name}</div>
                   </div>
+                  <span style={{ fontSize: 11, color: "var(--red)", fontWeight: 700, whiteSpace: "nowrap" }}>Trade Price →</span>
                 </div>
               ))}
             </div>
@@ -1729,22 +1660,22 @@ export default function BanwellWholesale() {
         ))}
       </div>
 
-      {/* ── FEATURED PRODUCTS ── */}
+      {/* ── ALL STOCK LINES ── */}
       <div className="section">
         <div className="section-header">
-          <div className="section-title">Featured Products</div>
-          <div className="view-all" onClick={() => scrollToSection("products")}>View All →</div>
+          <div className="section-title">All Stock Lines</div>
+          <div className="view-all" onClick={() => scrollToSection("contact")}>Request Catalogue →</div>
         </div>
         <div className="products-grid">
           {ALL_PRODUCTS.slice(0, 8).map((p, i) => (
-            <ProductCard key={p.id} p={p} onAdd={addToCart} delay={i * 60} />
+            <ProductCard key={p.id} p={p} onContact={handleContactProduct} delay={i * 60} />
           ))}
         </div>
       </div>
 
       {/* ── BRAND LOGOS ── */}
       <div className="brands-section">
-        <div className="brands-title">Trusted UK Authorised Brands</div>
+        <div className="brands-title">Our Authorised Brand Portfolio</div>
         <div className="brands-scroll-wrap">
           <div className="brands-scroll">
             {[...BRAND_LIST, ...BRAND_LIST].map((b, i) => {
@@ -1764,7 +1695,7 @@ export default function BanwellWholesale() {
       {/* ── TESTIMONIALS ── */}
       <div className="testimonials">
         <div className="testimonials-inner">
-          <div className="testimonials-title">What Our Customers <span>Say</span></div>
+          <div className="testimonials-title">What Our Trade Partners <span>Say</span></div>
           <div className="reviews-grid">
             {REVIEWS.map((r, i) => (
               <div key={i} className="review-card" style={{ animationDelay: `${i*100}ms` }}>
@@ -1786,7 +1717,7 @@ export default function BanwellWholesale() {
       {/* ── ABOUT ── */}
       <div className="about" id="about">
         <div className="about-img-wrap">
-          <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800&q=80" alt="Banwell Wholesale warehouse" />
+          <img src="https://media.istockphoto.com/id/2214019952/photo/asian-senior-couple-using-and-selecting-digital-tablet-in-modern-electronics-store.webp?a=1&b=1&s=612x612&w=0&k=20&c=UKeT4U5zzlW0yTBH3VfABoszk8yBy4HKxfuUcdzCR9k=" alt="Banwell Wholesale warehouse" />
           <div className="about-badge-float">
             <div className="about-badge-num">15+</div>
             <div className="about-badge-label">Years in Business</div>
@@ -1794,13 +1725,13 @@ export default function BanwellWholesale() {
         </div>
         <div className="about-content">
           <div className="about-tag">About Banwell Ltd</div>
-          <h2 className="about-title">UK's Trusted <span>Electronics</span> Wholesale Partner</h2>
-          <p className="about-text">Banwell Wholesale is a leading UK electronics distributor based in Croydon, London. We supply premium consumer electronics from the world's top brands — Apple, Samsung, Sony, Dell, HP, Lenovo and more — to retailers, resellers, and individual customers across the United Kingdom.</p>
-          <p className="about-text">As an authorised reseller with direct manufacturer relationships, we guarantee 100% genuine products backed by full UK warranty. Our competitive wholesale pricing enables our trade partners to maximise their margins while offering customers exceptional value.</p>
+          <h2 className="about-title">UK's Trusted <span>Electronics</span> Distribution Partner</h2>
+          <p className="about-text">Banwell Wholesale is a leading UK electronics distributor based in Aylesbury, England. We supply premium consumer electronics from the world's top brands — Apple, Sony, Nintendo, Microsoft, Gigabyte, PNY, Dyson and more — to retailers, resellers, and trade buyers across the United Kingdom.</p>
+          <p className="about-text">As an authorised distributor with direct manufacturer relationships, we guarantee 100% genuine products backed by full UK warranty. Our competitive wholesale pricing enables our trade partners to maximise their margins while offering customers exceptional value.</p>
           <div className="about-stats">
             <div className="about-stat">
               <div className="about-stat-num">50K+</div>
-              <div className="about-stat-label">Happy Customers</div>
+              <div className="about-stat-label">Units Distributed</div>
             </div>
             <div className="about-stat">
               <div className="about-stat-num">200+</div>
@@ -1811,7 +1742,7 @@ export default function BanwellWholesale() {
               <div className="about-stat-label">Premium Brands</div>
             </div>
           </div>
-          <button className="btn-primary" style={{ marginTop: 28 }} onClick={() => scrollToSection("contact")}>Contact Us →</button>
+          <button className="btn-primary" style={{ marginTop: 28 }} onClick={() => scrollToSection("contact")}>Become a Trade Partner →</button>
         </div>
       </div>
 
@@ -1819,17 +1750,17 @@ export default function BanwellWholesale() {
       <div className="newsletter">
         <div className="newsletter-inner">
           <div className="newsletter-text">
-            <h3>Stay Updated with Hot Deals</h3>
-            <p>Get exclusive wholesale pricing and early access to new products.</p>
+            <h3>Stay Updated with New Stock</h3>
+            <p>Get exclusive trade pricing and early access to new product lines.</p>
           </div>
           <div className="newsletter-form">
             <input
               type="email"
-              placeholder="Enter your email address…"
+              placeholder="Enter your business email…"
               value={newsletter}
               onChange={e => setNewsletter(e.target.value)}
             />
-            <button onClick={() => { if(newsletter) { showToast("Subscribed! Welcome to Banwell deals."); setNewsletter(""); } }}>Subscribe</button>
+            <button onClick={() => { if(newsletter) { showToast("Subscribed! Welcome to Banwell trade updates."); setNewsletter(""); } }}>Subscribe</button>
           </div>
         </div>
       </div>
@@ -1838,11 +1769,11 @@ export default function BanwellWholesale() {
       <div className="contact" id="contact">
         <div className="contact-info">
           <h2 className="contact-info-title">Get In Touch</h2>
-          <p className="contact-info-sub">Whether you're a retailer, reseller, or individual buyer — we'd love to hear from you. Reach out and our team will respond within one business day.</p>
+          <p className="contact-info-sub">Whether you're a retailer, reseller, or trade buyer — we'd love to hear from you. Contact us to discuss trade accounts, bulk pricing, or product availability.</p>
           {[
             { icon: "📞", title: "Phone", text: "+44 7777 664194\nMon–Fri 9am–6pm GMT" },
             { icon: "✉️", title: "Email", text: "info@banwellwholesale.co.uk\nGeneral & trade enquiries" },
-            { icon: "📍", title: "Address", text: "Flat 5, 13 Thornhill Road\nCroydon, CR0 2XZ, UK" },
+            { icon: "📍", title: "Address", text: "Unit 5 Vale Industrial Centre\nSouthern Road, Aylesbury\nEngland, HP19 9EW" },
           ].map((d, i) => (
             <div key={i} className="contact-detail">
               <div className="contact-detail-icon" style={{ fontSize: "18px" }}>{d.icon}</div>
@@ -1854,13 +1785,14 @@ export default function BanwellWholesale() {
           ))}
         </div>
         <div className="contact-form">
-          <h3 style={{ fontFamily: "var(--font-cond)", fontSize: "22px", fontWeight: 800, marginBottom: "24px", color: "var(--dark)" }}>Send Us a Message</h3>
+          <h3 style={{ fontFamily: "var(--font-cond)", fontSize: "22px", fontWeight: 800, marginBottom: "6px", color: "var(--dark)" }}>Trade & Wholesale Enquiries</h3>
+          <p style={{ fontSize: 13, color: "var(--gray)", marginBottom: 24 }}>Prices are available to verified trade accounts only. Please complete the form below and our trade team will respond within one business day.</p>
           {formSent ? (
             <div style={{ textAlign: "center", padding: "40px 20px" }}>
               <div style={{ fontSize: "48px", marginBottom: 16 }}>✅</div>
               <h4 style={{ fontSize: 20, fontWeight: 700, color: "var(--dark)", marginBottom: 8 }}>Message Sent!</h4>
-              <p style={{ color: "var(--gray)" }}>Your email client has been opened. We'll get back to you soon.</p>
-              <button className="btn-primary" style={{ marginTop: 20 }} onClick={() => setFormSent(false)}>Send Another</button>
+              <p style={{ color: "var(--gray)" }}>Your email client has been opened. Our trade team will be in touch shortly.</p>
+              <button className="btn-primary" style={{ marginTop: 20 }} onClick={() => setFormSent(false)}>Send Another Enquiry</button>
             </div>
           ) : (
             <>
@@ -1870,35 +1802,39 @@ export default function BanwellWholesale() {
                   <input name="name" value={form.name} onChange={handleFormChange} placeholder="John Smith" />
                 </div>
                 <div className="form-group">
-                  <label>Email Address *</label>
-                  <input name="email" type="email" value={form.email} onChange={handleFormChange} placeholder="john@example.com" />
+                  <label>Company Name</label>
+                  <input name="company" value={form.company} onChange={handleFormChange} placeholder="Your Ltd / Business Name" />
                 </div>
               </div>
               <div className="form-row">
                 <div className="form-group">
+                  <label>Email Address *</label>
+                  <input name="email" type="email" value={form.email} onChange={handleFormChange} placeholder="john@yourbusiness.co.uk" />
+                </div>
+                <div className="form-group">
                   <label>Phone Number</label>
                   <input name="phone" value={form.phone} onChange={handleFormChange} placeholder="+44 7xxx xxxxxx" />
                 </div>
-                <div className="form-group">
-                  <label>Subject</label>
-                  <select name="subject" value={form.subject} onChange={handleFormChange}>
-                    <option>General Enquiry</option>
-                    <option>Trade Account</option>
-                    <option>Product Availability</option>
-                    <option>Bulk Order</option>
-                    <option>Returns & Warranty</option>
-                    <option>Technical Support</option>
-                  </select>
-                </div>
+              </div>
+              <div className="form-group">
+                <label>Enquiry Type</label>
+                <select name="subject" value={form.subject} onChange={handleFormChange}>
+                  <option>Trade Account Enquiry</option>
+                  <option>Product Pricing Enquiry</option>
+                  <option>Bulk Order Enquiry</option>
+                  <option>Stock Availability</option>
+                  <option>Returns & Warranty</option>
+                  <option>General Enquiry</option>
+                </select>
               </div>
               <div className="form-group">
                 <label>Message *</label>
-                <textarea name="message" value={form.message} onChange={handleFormChange} placeholder="Tell us about your enquiry, products you're interested in, or trade account requirements…" />
+                <textarea name="message" value={form.message} onChange={handleFormChange} placeholder="Please include the products you're interested in, quantities required, and any other relevant details…" />
               </div>
               <button className="btn-primary" style={{ width: "100%", padding: "14px" }} onClick={handleFormSubmit}>
-                Send Message via Email →
+                Send Enquiry →
               </button>
-              <p style={{ fontSize: 12, color: "var(--gray)", marginTop: 10, textAlign: "center" }}>This will open your email client pre-filled and ready to send.</p>
+              <p style={{ fontSize: 12, color: "var(--gray)", marginTop: 10, textAlign: "center" }}>This will open your email client ready to send to our trade team.</p>
             </>
           )}
         </div>
@@ -1908,19 +1844,22 @@ export default function BanwellWholesale() {
       <footer className="footer">
         <div className="footer-inner">
           <div>
-            {/* Footer logo */}
             <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 14 }}>
               <LogoImgFooter />
               <div className="footer-brand-name" style={{ margin: 0 }}>Banwell<span>.</span></div>
             </div>
-            <p className="footer-about">Banwell Wholesale Ltd is a UK-based authorised electronics distributor supplying premium consumer technology from the world's leading brands. Trade accounts, bulk orders, and retail supply welcome.</p>
+            <p className="footer-about">Banwell Wholesale Ltd is a UK-based authorised electronics distributor supplying premium consumer technology from the world's leading brands. Trade accounts, bulk orders, and retail supply welcome. Based in Aylesbury, England.</p>
+            <p className="footer-about" style={{ marginTop: 8 }}>
+              📞 <a href="tel:+447777664194" style={{ color: "rgba(255,255,255,0.6)" }}>+44 7777 664194</a> &nbsp;|&nbsp;
+              ✉️ <a href="mailto:info@banwellwholesale.co.uk" style={{ color: "rgba(255,255,255,0.6)" }}>info@banwellwholesale.co.uk</a>
+            </p>
           </div>
           <div className="footer-col">
             <h4>Quick Links</h4>
             {[
               { label: "Home", section: "home" },
               { label: "About Us", section: "about" },
-              { label: "Hot Deals", section: "hot-deals" },
+              { label: "Stock Lines", section: "hot-deals" },
               { label: "Products", section: "products" },
               { label: "Contact", section: "contact" },
             ].map(l => (
@@ -1929,76 +1868,24 @@ export default function BanwellWholesale() {
           </div>
           <div className="footer-col">
             <h4>Categories</h4>
-            {["Laptops & Notebooks", "Smartphones", "Tablets", "Accessories & Audio", "Smartwatches", "Gaming"].map(l => (
+            {["Apple Products", "Gaming & Consoles", "Audio & Headphones", "Graphics Cards", "Health & Wellness", "Accessories"].map(l => (
               <a key={l} className="footer-link" onClick={() => scrollToSection("products")}>{l}</a>
             ))}
           </div>
           <div className="footer-col">
-            <h4>Support</h4>
-            {["Track My Order", "Returns Policy", "Warranty Claims", "FAQs", "Terms & Conditions", "Privacy Policy"].map(l => (
+            <h4>Trade Info</h4>
+            {["Open a Trade Account", "Bulk Order Enquiry", "Returns Policy", "Warranty Claims", "Terms & Conditions", "Privacy Policy"].map(l => (
               <a key={l} className="footer-link">{l}</a>
             ))}
           </div>
         </div>
         <div className="footer-bottom-bar">
           <div className="footer-bottom">
-            <span>© 2025 Banwell Wholesale Ltd. All rights reserved. Croydon, UK.</span>
-            <div className="footer-payments">
-              <span style={{ fontSize: 12, color: "rgba(255,255,255,0.4)", marginRight: 6 }}>We accept:</span>
-              <div className="payment-badge-wrap"><PaymentVisa /></div>
-              <div className="payment-badge-wrap"><PaymentMastercard /></div>
-              <div className="payment-badge-wrap"><PaymentAmex /></div>
-              <div className="payment-badge-wrap"><PaymentPayPal /></div>
-              <div className="payment-badge-wrap"><PaymentBACS /></div>
-            </div>
+            <span>© 2025 Banwell Wholesale Ltd. All rights reserved. Company Reg No. England & Wales. Unit 5 Vale Industrial Centre, Aylesbury, HP19 9EW.</span>
+            <span className="footer-reg">Authorised UK Distributor · Trade Only · B2B Wholesale</span>
           </div>
         </div>
       </footer>
-
-      {/* ── CART DRAWER ── */}
-      {cartOpen && (
-        <>
-          <div className="cart-overlay" onClick={() => setCartOpen(false)} />
-          <div className="cart-drawer">
-            <div className="cart-header">
-              <h3>🛒 Your Cart ({cartCount})</h3>
-              <button className="cart-close" onClick={() => setCartOpen(false)}>✕</button>
-            </div>
-            <div className="cart-items">
-              {cart.length === 0 ? (
-                <div className="empty-cart">
-                  <div className="empty-cart-icon">🛒</div>
-                  <p>Your cart is empty.<br />Start adding products!</p>
-                </div>
-              ) : (
-                cart.map(item => (
-                  <div key={item.id} className="cart-item">
-                    <img src={item.img} alt={item.name} />
-                    <div className="cart-item-info">
-                      <div className="cart-item-name">{item.brand} {item.name}</div>
-                      <div className="cart-item-qty">
-                        <button className="qty-btn" onClick={() => updateQty(item.id, -1)}>−</button>
-                        <span className="qty-num">{item.qty}</span>
-                        <button className="qty-btn" onClick={() => updateQty(item.id, 1)}>+</button>
-                      </div>
-                    </div>
-                    <button className="cart-remove" onClick={() => removeItem(item.id)}>✕</button>
-                  </div>
-                ))
-              )}
-            </div>
-            {cart.length > 0 && (
-              <div className="cart-footer">
-                <div className="cart-total">
-                  <span className="cart-total-label">Items in Enquiry</span>
-                  <span className="cart-total-price">{cartCount} item{cartCount !== 1 ? "s" : ""}</span>
-                </div>
-                <button className="cart-checkout" onClick={() => { setCartOpen(false); scrollToSection("contact"); }}>Enquire About These Items →</button>
-              </div>
-            )}
-          </div>
-        </>
-      )}
 
       {/* ── MOBILE NAV ── */}
       {mobileNavOpen && (
@@ -2034,17 +1921,17 @@ export default function BanwellWholesale() {
   );
 }
 
-// ─── SMALL LOGO HELPERS (for footer & mobile nav) ────────────────────────────
+// ─── SMALL LOGO HELPERS ───────────────────────────────────────────────────────
 function LogoImgFooter() {
   const [err, setErr] = useState(false);
   if (err) return null;
   return (
-        <img
-          src="/logo.jpeg"
-          alt="Banwell Wholesale"
-          className="logo-img"
-          onError={() => setImgError(true)}
-        />
+    <img
+      src="/logo.jpeg"
+      alt="Banwell Wholesale"
+      style={{ height: 36, width: "auto", objectFit: "contain", mixBlendMode: "screen", filter: "brightness(1.2)", background: "transparent" }}
+      onError={() => setErr(true)}
+    />
   );
 }
 
@@ -2052,13 +1939,11 @@ function LogoImgMini() {
   const [err, setErr] = useState(false);
   if (err) return null;
   return (
-        <img
-          src="/logo.jpeg"
-          alt="Banwell Wholesale"
-          className="logo-img"
-          onError={() => setImgError(true)}
-        />
+    <img
+      src="/logo.jpeg"
+      alt="Banwell Wholesale"
+      style={{ height: 32, width: "auto", objectFit: "contain", mixBlendMode: "screen", filter: "brightness(1.2)", background: "transparent" }}
+      onError={() => setErr(true)}
+    />
   );
 }
-
-
