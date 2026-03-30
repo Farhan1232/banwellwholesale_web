@@ -1718,10 +1718,10 @@ export default function BanwellWholesale() {
       <div className="about" id="about">
         <div className="about-img-wrap">
           <img src="https://media.istockphoto.com/id/2214019952/photo/asian-senior-couple-using-and-selecting-digital-tablet-in-modern-electronics-store.webp?a=1&b=1&s=612x612&w=0&k=20&c=UKeT4U5zzlW0yTBH3VfABoszk8yBy4HKxfuUcdzCR9k=" alt="Banwell Wholesale warehouse" />
-          <div className="about-badge-float">
+          {/* <div className="about-badge-float">
             <div className="about-badge-num">15+</div>
             <div className="about-badge-label">Years in Business</div>
-          </div>
+          </div> */}
         </div>
         <div className="about-content">
           <div className="about-tag">About Banwell Ltd</div>
