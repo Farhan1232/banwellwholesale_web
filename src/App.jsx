@@ -1423,7 +1423,7 @@ export default function BanwellWholesale() {
     scrollToSection(link.section);
   };
 
-  const tickerText = "🏭 AUTHORISED UK DISTRIBUTOR — Apple MacBook Pro M4 · PS5 Digital Edition Slim · Nintendo Switch 2 · RTX 5090 · AirPods 4 ANC · Sony WH-1000XM5 · Xbox Series X · Dyson HS08 · Free Delivery Over £500 · Trade Accounts Available · Call +44 7777 664194 · Bulk Orders Welcome · ";
+  const tickerText = "🏭 AUTHORISED UK DISTRIBUTOR — Apple MacBook Pro M4 · PS5 Digital Edition Slim · Nintendo Switch 2 · RTX 5090 · AirPods 4 ANC · Sony WH-1000XM5 · Xbox Series X · Dyson HS08 · Free Delivery Over £500 · Trade Accounts Available · Call02034885029· Bulk Orders Welcome · ";
 
   return (
     <div id="home" style={{ width: "100vw", maxWidth: "100vw", overflowX: "hidden", position: "relative", left: "50%", right: "50%", marginLeft: "-50vw", marginRight: "-50vw" }}>
@@ -1434,7 +1434,7 @@ export default function BanwellWholesale() {
       <div className="topbar">
         <div className="topbar-inner">
           <div className="topbar-left">
-            <span>📞 <a href="tel:+447777664194">+44 7777 664194</a></span>
+            <span>📞 <a href="tel:02034885029">02034885029</a></span>
             <span>✉️ <a href="mailto:info@banwellwholesale.co.uk">info@banwellwholesale.co.uk</a></span>
             <span>📍 Unit 5 Vale Industrial Centre, Southern Road, Aylesbury, HP19 9EW</span>
           </div>
@@ -1771,7 +1771,7 @@ export default function BanwellWholesale() {
           <h2 className="contact-info-title">Get In Touch</h2>
           <p className="contact-info-sub">Whether you're a retailer, reseller, or trade buyer — we'd love to hear from you. Contact us to discuss trade accounts, bulk pricing, or product availability.</p>
           {[
-            { icon: "📞", title: "Phone", text: "+44 7777 664194\nMon–Fri 9am–6pm GMT" },
+            { icon: "📞", title: "Phone", text: "02034885029\nMon–Fri 9am–6pm GMT" },
             { icon: "✉️", title: "Email", text: "info@banwellwholesale.co.uk\nGeneral & trade enquiries" },
             { icon: "📍", title: "Address", text: "Unit 5 Vale Industrial Centre\nSouthern Road, Aylesbury\nEngland, HP19 9EW" },
           ].map((d, i) => (
@@ -1813,7 +1813,7 @@ export default function BanwellWholesale() {
                 </div>
                 <div className="form-group">
                   <label>Phone Number</label>
-                  <input name="phone" value={form.phone} onChange={handleFormChange} placeholder="+44 7xxx xxxxxx" />
+                  <input name="phone" value={form.phone} onChange={handleFormChange} placeholder="02034885029" />
                 </div>
               </div>
               <div className="form-group">
@@ -1850,7 +1850,7 @@ export default function BanwellWholesale() {
             </div>
             <p className="footer-about">Banwell Wholesale Ltd is a UK-based authorised electronics distributor supplying premium consumer technology from the world's leading brands. Trade accounts, bulk orders, and retail supply welcome. Based in Aylesbury, England.</p>
             <p className="footer-about" style={{ marginTop: 8 }}>
-              📞 <a href="tel:+447777664194" style={{ color: "rgba(255,255,255,0.6)" }}>+44 7777 664194</a> &nbsp;|&nbsp;
+              📞 <a href="tel: 02034885029" style={{ color: "rgba(255,255,255,0.6)" }}>02034885029</a> &nbsp;|&nbsp;
               ✉️ <a href="mailto:info@banwellwholesale.co.uk" style={{ color: "rgba(255,255,255,0.6)" }}>info@banwellwholesale.co.uk</a>
             </p>
           </div>
@@ -1903,7 +1903,7 @@ export default function BanwellWholesale() {
               <a key={l.label} className="mobile-nav-link" onClick={() => handleNavClick(l)}>{l.label}</a>
             ))}
             <div style={{ marginTop: 24, padding: "16px 0", borderTop: "1px solid rgba(255,255,255,0.1)" }}>
-              <div style={{ color: "rgba(255,255,255,0.6)", fontSize: 13, marginBottom: 8 }}>📞 +44 7777 664194</div>
+              <div style={{ color: "rgba(255,255,255,0.6)", fontSize: 13, marginBottom: 8 }}>📞 02034885029</div>
               <div style={{ color: "rgba(255,255,255,0.6)", fontSize: 13 }}>✉️ info@banwellwholesale.co.uk</div>
             </div>
           </div>
