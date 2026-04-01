@@ -1239,8 +1239,8 @@ const PRODUCTS = {
   ],
   Audio: [
     { id: 9,  brand: "Sony",    name: "WH-1000XM5 Wireless Headphones + Softcase",ean: "",                  img: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500&q=80", badge: "In Stock" },
-    { id: 10, brand: "Dyson",   name: "Dyson HS08 Airwrap Complete",              ean: "",                  img: "https://images.unsplash.com/photo-1522338242992-e1a54906a8da?w=500&q=80", badge: "New" },
-    { id: 11, brand: "Braun",   name: "ThermoScan IRT3030 Ear Thermometer",       ean: "4022167330307",     img: "https://images.unsplash.com/photo-1631549916768-4119b2e5f926?w=500&q=80", badge: "In Stock" },
+    { id: 10, brand: "Microsoft",   name: "MicroSoft Audio Dock",              ean: "",                  img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6R5GlRJdmC1cc5tmChlJJ5hV2CQGDxcQCyw&s", badge: "New" },
+    { id: 11, brand: "Apple",   name: "Apple Airpods Pro3",       ean: "4022167330307",     img: "https://images.unsplash.com/photo-1643479802396-8260177ffcb0?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8YXBwbGUlMjBhaXJwb2RzJTIwM3xlbnwwfHwwfHx8MA%3D%3D", badge: "In Stock" },
   ],
   Components: [
     { id: 12, brand: "Gigabyte",name: "GeForce RTX 5090 Graphics Card",           ean: "",                  img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-sn3HDft7eoMtcmN_tPkg4L_O9UQ-z12d1A&s", badge: "Limited" },
