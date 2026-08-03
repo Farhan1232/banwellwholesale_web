@@ -979,6 +979,34 @@ body { font-family: var(--font); color: var(--text); background: #fff; margin: 0
   .form-group input:focus, .form-group textarea:focus, .form-group select:focus { border-color: var(--red); }
   .form-group textarea { resize: vertical; min-height: 110px; }
 
+  .financing-page { width: 100%; padding: 48px 24px 72px; background: linear-gradient(180deg, #fff 0%, #fafafa 100%); }
+  .financing-shell { max-width: 1100px; margin: 0 auto; display: grid; gap: 24px; }
+  .financing-hero { background: linear-gradient(135deg, rgba(228,30,38,0.06), rgba(26,26,46,0.04)); border: 1px solid var(--border); border-radius: 22px; padding: 40px; box-shadow: var(--shadow); }
+  .financing-badge { display: inline-flex; align-items: center; gap: 8px; background: var(--red); color: #fff; padding: 8px 12px; border-radius: 999px; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 16px; }
+  .financing-title { font-family: var(--font-cond); font-size: clamp(32px, 4vw, 48px); font-weight: 800; color: var(--dark); margin-bottom: 12px; }
+  .financing-intro { font-size: 16px; color: #555; line-height: 1.8; max-width: 760px; }
+  .financing-card { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 24px; align-items: start; }
+  .financing-panel { background: #fff; border: 1px solid var(--border); border-radius: 18px; padding: 30px; box-shadow: var(--shadow); }
+  .financing-panel h3 { font-family: var(--font-cond); font-size: 24px; font-weight: 700; color: var(--dark); margin-bottom: 12px; }
+  .financing-panel p { font-size: 15px; color: #555; line-height: 1.8; margin-bottom: 12px; }
+  .financing-list { list-style: none; display: grid; gap: 10px; margin-top: 16px; }
+  .financing-list li { display: flex; align-items: center; gap: 8px; color: var(--text); font-weight: 600; }
+  .financing-contact { background: #fff; border: 1px solid var(--border); border-radius: 18px; padding: 30px; box-shadow: var(--shadow); }
+  .financing-contact h3 { font-family: var(--font-cond); font-size: 26px; font-weight: 700; color: var(--dark); margin-bottom: 8px; }
+  .financing-contact p { font-size: 14px; color: var(--gray); line-height: 1.7; margin-bottom: 20px; }
+
+  @media (max-width: 900px) {
+    .financing-card { grid-template-columns: 1fr; }
+    .financing-hero, .financing-panel, .financing-contact { padding: 24px; }
+  }
+
+  @media (max-width: 640px) {
+    .financing-page { padding: 28px 14px 48px; }
+    .financing-hero, .financing-panel, .financing-contact { padding: 20px; border-radius: 16px; }
+    .form-row { grid-template-columns: 1fr; }
+    .financing-intro { font-size: 15px; }
+  }
+
   /* ── FOOTER ── */
   .footer {
     background: var(--darker);
@@ -1166,6 +1194,7 @@ const BrandLogos = {
 // ─── DATA ─────────────────────────────────────────────────────────────────────
 const NAV_LINKS = [
   { label: "Home", section: "home" },
+  { label: "Financing", section: "financing" },
   { label: "Stock Lines", section: "hot-deals" },
   { label: "Products", section: "products" },
   { label: "Apple", section: "products" },
@@ -1352,6 +1381,7 @@ const ProductCard = ({ p, onContact, delay = 0 }) => {
 // ─── MAIN APP ─────────────────────────────────────────────────────────────────
 export default function BanwellWholesale() {
   const [activeNav, setActiveNav] = useState("Home");
+  const [page, setPage] = useState("home");
   const [heroIdx, setHeroIdx] = useState(0);
   const [productTab, setProductTab] = useState("Apple");
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
@@ -1359,6 +1389,8 @@ export default function BanwellWholesale() {
   const [countdown, setCountdown] = useState({ d: 2, h: 9, m: 47, s: 33 });
   const [form, setForm] = useState({ name: "", email: "", company: "", phone: "", subject: "Trade Account Enquiry", message: "" });
   const [formSent, setFormSent] = useState(false);
+  const [financingForm, setFinancingForm] = useState({ name: "", company: "", email: "", phone: "", message: "" });
+  const [financingFormSent, setFinancingFormSent] = useState(false);
   const [newsletter, setNewsletter] = useState("");
   const heroTimer = useRef(null);
 
@@ -1405,6 +1437,7 @@ export default function BanwellWholesale() {
   };
 
   const handleFormChange = (e) => setForm(f => ({ ...f, [e.target.name]: e.target.value }));
+  const handleFinancingFormChange = (e) => setFinancingForm(f => ({ ...f, [e.target.name]: e.target.value }));
 
   const handleFormSubmit = () => {
     if (!form.name || !form.email || !form.message) { showToast("Please fill in all required fields"); return; }
@@ -1414,16 +1447,239 @@ export default function BanwellWholesale() {
     showToast("Opening your email client…");
   };
 
+  const handleFinancingSubmit = () => {
+    if (!financingForm.name || !financingForm.email || !financingForm.message) {
+      showToast("Please fill in your name, email and message");
+      return;
+    }
+    const mailto = `mailto:info@banwellwholesale.co.uk?subject=${encodeURIComponent(`Business Financing enquiry from ${financingForm.name}`)}&body=${encodeURIComponent(`Name: ${financingForm.name}\nCompany: ${financingForm.company}\nEmail: ${financingForm.email}\nPhone: ${financingForm.phone}\n\nMessage:\n${financingForm.message}`)}`;
+    window.location.href = mailto;
+    setFinancingFormSent(true);
+    showToast("Opening your email client…");
+  };
+
   const handleNavClick = (link) => {
     setActiveNav(link.label);
     setMobileNavOpen(false);
+    if (link.label === "Financing") {
+      setPage("financing");
+      return;
+    }
+    setPage("home");
     if (["Apple","Gaming","Audio","Components"].includes(link.label)) {
       setProductTab(link.label);
+    }
+    if (link.section === "contact") {
+      scrollToSection("contact");
+      return;
     }
     scrollToSection(link.section);
   };
 
+  const handleLogoClick = () => {
+    setActiveNav("Home");
+    setPage("home");
+    scrollToSection("home");
+  };
+
   const tickerText = "🏭 AUTHORISED UK DISTRIBUTOR — Apple MacBook Pro M4 · PS5 Digital Edition Slim · Nintendo Switch 2 · RTX 5090 · AirPods 4 ANC · Sony WH-1000XM5 · Xbox Series X · Dyson HS08 · Free Delivery Over £500 · Trade Accounts Available · Call02034885029· Bulk Orders Welcome · ";
+
+  if (page === "financing") {
+    return (
+      <div id="home" style={{ width: "100vw", maxWidth: "100vw", overflowX: "hidden", position: "relative", left: "50%", right: "50%", marginLeft: "-50vw", marginRight: "-50vw" }}>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700;800;900&family=Barlow+Condensed:wght@400;600;700;800&display=swap" rel="stylesheet" />
+
+        <div className="topbar">
+          <div className="topbar-inner">
+            <div className="topbar-left">
+              <span>📞 <a href="tel:02034885029">02034885029</a></span>
+              <span>✉️ <a href="mailto:info@banwellwholesale.co.uk">info@banwellwholesale.co.uk</a></span>
+              <span>📍 Unit 5 Vale Industrial Centre, Southern Road, Aylesbury, HP19 9EW</span>
+            </div>
+            <div className="topbar-right">
+              <span>Free Delivery Over £500</span>
+              <span style={{ color: "rgba(255,255,255,0.3)" }}>|</span>
+              <span>Trade Accounts Welcome</span>
+            </div>
+          </div>
+        </div>
+
+        <header className="header">
+          <div className="header-inner">
+            <button
+              style={{ display: "flex", alignItems: "center", justifyContent: "center", background: "rgba(255,255,255,0.08)", color: "#fff", borderRadius: "6px", fontSize: "20px", width: "40px", height: "40px", border: "none", cursor: "pointer", flexShrink: 0 }}
+              onClick={() => setMobileNavOpen(true)}
+            >☰</button>
+
+            <SiteLogo onClick={handleLogoClick} />
+
+            <div className="search-bar">
+              <select>
+                <option>All Categories</option>
+                <option>Apple</option>
+                <option>Gaming</option>
+                <option>Audio</option>
+                <option>Components</option>
+              </select>
+              <input type="text" placeholder="Search products, brands, EAN codes…" />
+              <button>Search</button>
+            </div>
+
+            <div className="header-actions">
+              <button
+                className="btn-primary"
+                style={{ padding: "10px 20px", fontSize: "13px", whiteSpace: "nowrap" }}
+                onClick={() => scrollToSection("financing-contact")}
+              >
+                Request Financing Info
+              </button>
+            </div>
+          </div>
+        </header>
+
+        <nav className="nav">
+          <div className="nav-inner">
+            {NAV_LINKS.map(l => (
+              <a key={l.label} className={`nav-link${activeNav===l.label?" active":""}`} onClick={() => handleNavClick(l)}>
+                {l.label}
+              </a>
+            ))}
+          </div>
+        </nav>
+
+        <div className="financing-page">
+          <div className="financing-shell">
+            <section className="financing-hero">
+              <div className="financing-badge">Flexible Business Financing</div>
+              <h1 className="financing-title">Business Financing</h1>
+              <p className="financing-intro">We offer practical financing solutions for growing businesses, with rates starting from 1% to 3%. Our team helps companies secure flexible funding for expansion, stock purchases, and working capital needs.</p>
+              <p className="financing-intro" style={{ marginTop: 12 }}>Every request is reviewed with a simple, professional approach so you can move forward with confidence and clarity.</p>
+            </section>
+
+            <div className="financing-card">
+              <div className="financing-panel">
+                <h3>How We Support Businesses</h3>
+                <p>Whether you need support for inventory, equipment, or day-to-day operations, our financing solutions are designed to be efficient and straightforward.</p>
+                <ul className="financing-list">
+                  <li>✓ Competitive rates from 1% to 3%</li>
+                  <li>✓ Fast response for business funding requests</li>
+                  <li>✓ Flexible options for established and growing companies</li>
+                </ul>
+              </div>
+              <div className="financing-panel">
+                <h3>What to Expect</h3>
+                <p>We keep the process simple and professional, with clear guidance from initial enquiry to decision.</p>
+                <p>Share a brief overview of your business needs and our team will follow up with the next steps.</p>
+              </div>
+            </div>
+
+            <section className="financing-contact" id="financing-contact">
+              <h3>Contact Us</h3>
+              <p>Tell us about your business and financing needs. We’ll get back to you with the information you need.</p>
+              {financingFormSent ? (
+                <div style={{ textAlign: "center", padding: "24px 8px" }}>
+                  <div style={{ fontSize: "40px", marginBottom: 10 }}>✅</div>
+                  <h4 style={{ fontSize: 20, fontWeight: 700, color: "var(--dark)" }}>Thanks for getting in touch</h4>
+                  <p style={{ color: "var(--gray)" }}>Your email client has been opened and our team will review your enquiry shortly.</p>
+                  <button className="btn-primary" style={{ marginTop: 18 }} onClick={() => setFinancingFormSent(false)}>Send Another Request</button>
+                </div>
+              ) : (
+                <>
+                  <div className="form-row">
+                    <div className="form-group">
+                      <label>Name *</label>
+                      <input name="name" value={financingForm.name} onChange={handleFinancingFormChange} placeholder="Your full name" />
+                    </div>
+                    <div className="form-group">
+                      <label>Company Name</label>
+                      <input name="company" value={financingForm.company} onChange={handleFinancingFormChange} placeholder="Your business name" />
+                    </div>
+                  </div>
+                  <div className="form-row">
+                    <div className="form-group">
+                      <label>Email *</label>
+                      <input name="email" type="email" value={financingForm.email} onChange={handleFinancingFormChange} placeholder="you@business.com" />
+                    </div>
+                    <div className="form-group">
+                      <label>Phone Number</label>
+                      <input name="phone" value={financingForm.phone} onChange={handleFinancingFormChange} placeholder="02034885029" />
+                    </div>
+                  </div>
+                  <div className="form-group">
+                    <label>Message *</label>
+                    <textarea name="message" value={financingForm.message} onChange={handleFinancingFormChange} placeholder="Please share a brief overview of your financing needs and business goals." />
+                  </div>
+                  <button className="btn-primary" style={{ width: "100%", padding: "14px" }} onClick={handleFinancingSubmit}>Request Financing Info</button>
+                </>
+              )}
+            </section>
+          </div>
+        </div>
+
+        <footer className="footer">
+          <div className="footer-inner">
+            <div>
+              <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 14 }}>
+                <LogoImgFooter />
+                <div className="footer-brand-name" style={{ margin: 0 }}>Banwell<span>.</span></div>
+              </div>
+              <p className="footer-about">Banwell Wholesale Ltd is a UK-based authorised electronics distributor supplying premium consumer technology from the world's leading brands. Trade accounts, bulk orders, and retail supply welcome. Based in Aylesbury, England.</p>
+            </div>
+            <div className="footer-col">
+              <h4>Quick Links</h4>
+              {[
+                { label: "Home", section: "home" },
+                { label: "Financing", section: "financing" },
+                { label: "About Us", section: "about" },
+                { label: "Products", section: "products" },
+                { label: "Contact", section: "contact" },
+              ].map(l => (
+                <a key={l.label} className="footer-link" onClick={() => { if (l.label === "Financing") { setPage("financing"); } else { setPage("home"); scrollToSection(l.section); } }}>{l.label}</a>
+              ))}
+            </div>
+            <div className="footer-col">
+              <h4>Trade Info</h4>
+              {"Open a Trade Account, Bulk Order Enquiry, Terms & Conditions, Privacy Policy".split(", ").map(l => (
+                <a key={l} className="footer-link">{l}</a>
+              ))}
+            </div>
+          </div>
+          <div className="footer-bottom-bar">
+            <div className="footer-bottom">
+              <span>© 2025 Banwell Wholesale Ltd. All rights reserved.</span>
+              <span className="footer-reg">Authorised UK Distributor · Trade Only · B2B Wholesale</span>
+            </div>
+          </div>
+        </footer>
+
+        {mobileNavOpen && (
+          <>
+            <div className="mobile-nav-overlay" onClick={() => setMobileNavOpen(false)} />
+            <div className="mobile-nav">
+              <div className="mobile-nav-header">
+                <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                  <LogoImgMini />
+                  <div className="logo" style={{ fontSize: 22 }}>Banwell<span style={{ color: "var(--red)" }}>.</span></div>
+                </div>
+                <button className="mobile-nav-close" onClick={() => setMobileNavOpen(false)}>✕</button>
+              </div>
+              {NAV_LINKS.map(l => (
+                <a key={l.label} className="mobile-nav-link" onClick={() => handleNavClick(l)}>{l.label}</a>
+              ))}
+            </div>
+          </>
+        )}
+
+        {toast && (
+          <div className="toast">
+            <span className="toast-icon">✓</span>
+            {toast}
+          </div>
+        )}
+      </div>
+    );
+  }
 
   return (
     <div id="home" style={{ width: "100vw", maxWidth: "100vw", overflowX: "hidden", position: "relative", left: "50%", right: "50%", marginLeft: "-50vw", marginRight: "-50vw" }}>
@@ -1454,7 +1710,7 @@ export default function BanwellWholesale() {
             onClick={() => setMobileNavOpen(true)}
           >☰</button>
 
-          <SiteLogo onClick={() => scrollToSection("home")} />
+          <SiteLogo onClick={handleLogoClick} />
 
           <div className="search-bar">
             <select>
@@ -1858,12 +2114,22 @@ export default function BanwellWholesale() {
             <h4>Quick Links</h4>
             {[
               { label: "Home", section: "home" },
+              { label: "Financing", section: "financing" },
               { label: "About Us", section: "about" },
               { label: "Stock Lines", section: "hot-deals" },
               { label: "Products", section: "products" },
               { label: "Contact", section: "contact" },
             ].map(l => (
-              <a key={l.label} className="footer-link" onClick={() => scrollToSection(l.section)}>{l.label}</a>
+              <a key={l.label} className="footer-link" onClick={() => {
+                if (l.label === "Financing") {
+                  setPage("financing");
+                  setActiveNav("Financing");
+                } else {
+                  setPage("home");
+                  setActiveNav(l.label === "About Us" ? "About" : l.label === "Home" ? "Home" : activeNav);
+                  scrollToSection(l.section);
+                }
+              }}>{l.label}</a>
             ))}
           </div>
           <div className="footer-col">
