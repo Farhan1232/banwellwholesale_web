@@ -1194,13 +1194,13 @@ const BrandLogos = {
 // ─── DATA ─────────────────────────────────────────────────────────────────────
 const NAV_LINKS = [
   { label: "Home", section: "home" },
-  { label: "Financing", section: "financing" },
   { label: "Stock Lines", section: "hot-deals" },
   { label: "Products", section: "products" },
   { label: "Apple", section: "products" },
   { label: "Gaming", section: "products" },
   { label: "Audio", section: "products" },
   { label: "Components", section: "products" },
+  { label: "Financing", section: "financing" },
   { label: "About", section: "about" },
   { label: "Contact", section: "contact" },
 ];
